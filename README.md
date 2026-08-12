@@ -111,38 +111,6 @@ npx cypress run
 ```bash
 npx cypress open
 ```
-
-## Boas práticas aplicadas
-
-- Page Object Model para separar elementos e ações da lógica de teste
-- cenários organizados por fluxo funcional
-- ações reutilizáveis e nomes descritivos
-- validações focadas em comportamento do usuário
-- estrutura pronta para expansão de novos casos
-
-## Diferencial para QA
-
-Este projeto demonstra uma visão prática de automação de testes que se alinha com demandas do mercado, como:
-
-- automatização de regressão
-- testes de fluxo crítico em aplicações web
-- atenção à experiência do usuário e à confiabilidade da funcionalidade
-- organização adequada para times de QA, desenvolvimento e manutenção contínua
-
-## Perfil profissional
-
-O projeto reforça competências relevantes para:
-
-- QA Automation Engineer
-- QA Analyst
-- Test Automation Engineer
-- SDET
-- Quality Engineer
-
-## Contato
-
-Se você quiser conversar sobre automação de testes, qualidade de software ou oportunidades de QA, fique à vontade para entrar em contato.
-
 ## Licença
 
 Este projeto foi criado para fins de estudo e demonstração de automação de testes.
