@@ -1,11 +1,9 @@
 ﻿export const elements = {
-    itemRow: '.cart_item',
-    checkoutButton: '[data-test="checkout"]',
-    continueButton: '[data-test="continue"]',
-    finishButton: '[data-test="finish"]',
-    cancelButton: '[data-test="cancel"]',
     firstNameInput: '[data-test="firstName"]',
     lastNameInput: '[data-test="lastName"]',
     postalCodeInput: '[data-test="postalCode"]',
+    continueButton: '[data-test="continue"]',
+    cancelButton: '[data-test="cancel"]',
+    finishButton: '[data-test="finish"]',
     errorMessage: '[data-test="error"]'
 }

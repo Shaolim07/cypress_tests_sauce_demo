@@ -1,11 +1,14 @@
-import { elements as el } from "./elements"
+﻿import { elements as el } from "./elements"
 
 class Inventory {
 
     validarAcessoAPagina() {
         cy.url().should('eq', 'https://www.saucedemo.com/inventory.html')
-        
-        cy.screenshot('acesso a pagina de inventário')
+        cy.screenshot('acesso a pagina de inventario')
+    }
+
+    abrirPagina() {
+        cy.visit('https://www.saucedemo.com/inventory.html')
     }
 
     adicionarProduto(itemName) {
@@ -14,6 +17,14 @@ class Inventory {
 
     removerProduto(itemName) {
         cy.get(el.removeFromCart(itemName)).click()
+    }
+
+    validarBotaoAlternaParaRemover(itemName) {
+        cy.get(el.removeFromCart(itemName)).should('be.visible')
+    }
+
+    validarBotaoAlternaParaAdicionar(itemName) {
+        cy.get(el.addToCart(itemName)).should('be.visible')
     }
 
     ordenarProdutos(opcao) {
@@ -33,11 +44,16 @@ class Inventory {
     }
 
     abrirDetalhesDoProduto(itemName) {
-        cy.contains('.inventory_item_name', itemName).click()
+        cy.contains(el.itemNames, itemName).click()
     }
 
     voltarParaListaDeProdutos() {
         cy.get(el.backToProducts).click()
+    }
+
+    validarListaDeProdutosVisivel() {
+        cy.get(el.inventoryList).should('be.visible')
+        cy.get(el.inventoryItem).should('have.length.at.least', 1)
     }
 }
 

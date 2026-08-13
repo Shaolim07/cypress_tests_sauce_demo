@@ -1,12 +1,8 @@
-import { elements as el } from "./elements"
+﻿import { elements as el } from "./elements"
 
-class Header{
+class Header {
     validarQueCarrinhoPossuiItens(quantidade) {
         cy.get(el.cartBadge).should('be.visible').and('have.text', quantidade.toString())
-    }
-
-    navegarParaCarrinho() {
-        cy.get(el.cartContainer).click()
     }
 
     validarQueCarrinhoNaoPossuiItens() {
@@ -14,13 +10,24 @@ class Header{
         cy.screenshot('produto removido')
     }
 
+    obterQuantidadeItensCarrinho() {
+        return cy.get('body').then(($body) => {
+            const badge = $body.find(el.cartBadge)
+            return badge.length ? Number(badge.text().trim()) : 0
+        })
+    }
+
+    navegarParaCarrinho() {
+        cy.get(el.cartContainer).click()
+    }
+
     abrirMenu() {
-        cy.get('#react-burger-menu-btn').click()
-        cy.get('#logout_sidebar_link').should('be.visible')
+        cy.get(el.menuButton).click()
+        cy.get(el.logoutLink).should('be.visible')
     }
 
     fazerLogout() {
-        cy.get('#logout_sidebar_link').click()
+        cy.get(el.logoutLink).click()
     }
 }
 

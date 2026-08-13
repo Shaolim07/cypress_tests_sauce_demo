@@ -1,4 +1,4 @@
-import { elements as el} from "./elements"
+﻿import { elements as el } from "./elements"
 
 class Login {
 
@@ -21,6 +21,10 @@ class Login {
         cy.get(el.loginButton).click()
     }
 
+    loginCom(username, password) {
+        this.preencherCredenciais(username, password)
+    }
+
     preencherCrendeciaisValidas() {
         this.preencherCredenciais('standard_user', 'secret_sauce')
     }
@@ -29,27 +33,23 @@ class Login {
         this.preencherCredenciais('user.invalid', 'password')
     }
 
-    validarErroCredenciaisInvalidas() {
-        cy.get(el.errorMessage).should(
-            'contain.text',
-            'Username and password do not match any user in this service'
-            )
+    validarErroCredenciaisEspecifica(mensagem) {
+        cy.get(el.errorMessage).should('contain.text', mensagem)
         cy.url().should('eq', 'https://www.saucedemo.com/')
+    }
+
+    validarErroCredenciaisInvalidas() {
+        this.validarErroCredenciaisEspecifica('Username and password do not match any user in this service')
         cy.screenshot('erro credenciais invalidas')
     }
 
     validarErroUsuarioBloqueado() {
-        cy.get(el.errorMessage).should(
-            'contain.text',
-            'Sorry, this user has been locked out.'
-        )
-        cy.url().should('eq', 'https://www.saucedemo.com/')
+        this.validarErroCredenciaisEspecifica('Sorry, this user has been locked out.')
         cy.screenshot('usuario bloqueado')
     }
 
     validarErroCampoObrigatorio(mensagem) {
-        cy.get(el.errorMessage).should('contain.text', mensagem)
-        cy.url().should('eq', 'https://www.saucedemo.com/')
+        this.validarErroCredenciaisEspecifica(mensagem)
     }
 
     validarPaginaLogin() {

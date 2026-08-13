@@ -1,7 +1,8 @@
-import Login from '../pages/login'
+﻿import Login from '../pages/login'
 import Inventory from '../pages/inventory'
 import Header from '../pages/header'
 import Cart from '../pages/cart'
+import Checkout from '../pages/checkout'
 
 describe('Fluxo de compra', () => {
     beforeEach(() => {
@@ -13,27 +14,27 @@ describe('Fluxo de compra', () => {
         Inventory.adicionarProduto('Sauce Labs Backpack')
         Header.navegarParaCarrinho()
         Cart.iniciarCheckout()
-        Cart.preencherDadosCheckout('João', 'Silva', '12345-678')
-        Cart.concluirCompra()
-        Cart.validarPedidoConcluido()
+        Checkout.preencherInformacoes('João', 'Silva', '12345-678')
+        Checkout.finalizar()
+        Checkout.validarPedidoConcluido()
     })
 
     it('Confirmar pedido após checkout', () => {
         Inventory.adicionarProduto('Sauce Labs Bike Light')
         Header.navegarParaCarrinho()
         Cart.iniciarCheckout()
-        Cart.preencherDadosCheckout('Maria', 'Souza', '98765-432')
+        Checkout.preencherInformacoes('Maria', 'Souza', '98765-432')
         Cart.validarProdutoPresenteCarrinho('Sauce Labs Bike Light')
-        Cart.concluirCompra()
-        Cart.validarPedidoConcluido()
+        Checkout.finalizar()
+        Checkout.validarPedidoConcluido()
     })
 
     it('Cancelar checkout e retornar para a navegação anterior', () => {
         Inventory.adicionarProduto('Sauce Labs Onesie')
         Header.navegarParaCarrinho()
         Cart.iniciarCheckout()
-        Cart.preencherDadosCheckout('Ana', 'Costa', '01010-000')
-        Cart.cancelarCheckout()
+        Checkout.preencherInformacoes('Ana', 'Costa', '01010-000')
+        Checkout.cancelar()
         cy.location('pathname').should('match', /\/cart\.html$|\/inventory\.html$/)
     })
 
@@ -41,7 +42,7 @@ describe('Fluxo de compra', () => {
         Inventory.adicionarProduto('Sauce Labs Backpack')
         Header.navegarParaCarrinho()
         Cart.iniciarCheckout()
-        cy.get('[data-test="continue"]').click()
-        Cart.validarMensagemErroCampoObrigatorio('First Name is required')
+        Checkout.continuar()
+        Checkout.validarErroCampoObrigatorio('First Name is required')
     })
 })

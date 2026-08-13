@@ -1,4 +1,6 @@
-export const elements = {
+﻿export const elements = {
     cartBadge: '.shopping_cart_badge',
-    cartContainer: '#shopping_cart_container'
+    cartContainer: '#shopping_cart_container',
+    menuButton: '#react-burger-menu-btn',
+    logoutLink: '#logout_sidebar_link'
 }
