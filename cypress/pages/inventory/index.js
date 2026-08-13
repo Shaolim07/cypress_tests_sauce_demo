@@ -1,14 +1,15 @@
-﻿import { elements as el } from "./elements"
+import BasePage from '../base.page'
+import { elements as el } from "./elements"
 
-class Inventory {
+class Inventory extends BasePage {
 
     validarAcessoAPagina() {
-        cy.url().should('eq', 'https://www.saucedemo.com/inventory.html')
-        cy.screenshot('acesso a pagina de inventario')
+        this.validarUrl('https://www.saucedemo.com/inventory.html')
+        this.capturarTela('acesso a pagina de inventario')
     }
 
     abrirPagina() {
-        cy.visit('https://www.saucedemo.com/inventory.html')
+        this.acessarUrl('https://www.saucedemo.com/inventory.html')
     }
 
     adicionarProduto(itemName) {

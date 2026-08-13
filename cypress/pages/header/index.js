@@ -1,13 +1,14 @@
-﻿import { elements as el } from "./elements"
+import BasePage from '../base.page'
+import { elements as el } from "./elements"
 
-class Header {
+class Header extends BasePage {
     validarQueCarrinhoPossuiItens(quantidade) {
         cy.get(el.cartBadge).should('be.visible').and('have.text', quantidade.toString())
     }
 
     validarQueCarrinhoNaoPossuiItens() {
         cy.get(el.cartBadge).should('not.exist')
-        cy.screenshot('produto removido')
+        this.capturarTela('produto removido')
     }
 
     obterQuantidadeItensCarrinho() {

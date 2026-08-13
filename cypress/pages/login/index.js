@@ -1,9 +1,11 @@
-﻿import { elements as el } from "./elements"
+import BasePage from '../base.page'
+import { elements as el } from "./elements"
+import { users } from '../../support/testData'
 
-class Login {
+class Login extends BasePage {
 
     visitarPagina() {
-        cy.visit('https://www.saucedemo.com/')
+        this.acessarUrl('https://www.saucedemo.com/')
     }
 
     preencherCredenciais(username, password) {
@@ -26,26 +28,26 @@ class Login {
     }
 
     preencherCrendeciaisValidas() {
-        this.preencherCredenciais('standard_user', 'secret_sauce')
+        this.preencherCredenciais(users.valid.username, users.valid.password)
     }
 
     preencherCrendeciaisInvalidas() {
-        this.preencherCredenciais('user.invalid', 'password')
+        this.preencherCredenciais(users.invalid.username, users.invalid.password)
     }
 
     validarErroCredenciaisEspecifica(mensagem) {
         cy.get(el.errorMessage).should('contain.text', mensagem)
-        cy.url().should('eq', 'https://www.saucedemo.com/')
+        this.validarUrl('https://www.saucedemo.com/')
     }
 
     validarErroCredenciaisInvalidas() {
         this.validarErroCredenciaisEspecifica('Username and password do not match any user in this service')
-        cy.screenshot('erro credenciais invalidas')
+        this.capturarTela('erro credenciais invalidas')
     }
 
     validarErroUsuarioBloqueado() {
         this.validarErroCredenciaisEspecifica('Sorry, this user has been locked out.')
-        cy.screenshot('usuario bloqueado')
+        this.capturarTela('usuario bloqueado')
     }
 
     validarErroCampoObrigatorio(mensagem) {
@@ -53,9 +55,9 @@ class Login {
     }
 
     validarPaginaLogin() {
-        cy.url().should('eq', 'https://www.saucedemo.com/')
+        this.validarUrl('https://www.saucedemo.com/')
         cy.get(el.loginButton).should('be.visible')
-        cy.screenshot('pagina login')
+        this.capturarTela('pagina login')
     }
 
     validarRedirecionamentoParaLogin() {

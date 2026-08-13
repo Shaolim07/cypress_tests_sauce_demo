@@ -1,9 +1,10 @@
-﻿import { elements as el } from "./elements"
+import BasePage from '../base.page'
+import { elements as el } from "./elements"
 
-class Cart {
+class Cart extends BasePage {
     validarProdutoPresenteCarrinho(name) {
         cy.contains(name).should('be.visible')
-        cy.screenshot('produto adicionado')
+        this.capturarTela('produto adicionado')
     }
 
     validarQuantidadeProdutos(quantidade) {
@@ -39,7 +40,7 @@ class Cart {
 
     validarPedidoConcluido() {
         cy.contains('Thank you for your order!').should('be.visible')
-        cy.screenshot('pedido concluido')
+        this.capturarTela('pedido concluido')
     }
 
     validarMensagemErroCampoObrigatorio(mensagem) {

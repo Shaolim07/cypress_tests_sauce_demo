@@ -1,6 +1,7 @@
-﻿import { elements as el } from "./elements"
+import BasePage from '../base.page'
+import { elements as el } from "./elements"
 
-class Checkout {
+class Checkout extends BasePage {
     preencherInformacoes(firstName, lastName, postalCode) {
         cy.get(el.firstNameInput).clear().type(firstName)
         cy.get(el.lastNameInput).clear().type(lastName)
